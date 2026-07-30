@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIF Trust — Enterprise Agent Governance Platform | Provenance, Replay, Authorization</title>
+    <meta name="description" content="Prove what your autonomous agents did, who approved it, and whether it can be trusted again. Execution receipts, provenance graphs, replay engine, and policy governance for enterprise AI.">
+    <meta name="keywords" content="AI governance, agent trust, execution provenance, AI audit, autonomous agents, enterprise AI, agent authorization, AI compliance">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://aif-trust.vercel.app">
+    <meta property="og:title" content="AIF Trust — Enterprise Agent Governance">
+    <meta property="og:description" content="Prove what your autonomous agents did. Enterprise-grade trust infrastructure for AI systems.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AIF Trust — Enterprise Agent Governance">
+    <meta name="twitter:description" content="Prove what your autonomous agents did. Trust infrastructure for enterprise AI.">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "AIF Trust",
+      "applicationCategory": "SecurityApplication",
+      "operatingSystem": "Linux, Cloud",
+      "offers": {
+        "@type": "AggregateOffer",
+        "lowPrice": "499",
+        "highPrice": "2500",
+        "priceCurrency": "USD"
+      },
+      "description": "Enterprise Agent Governance Platform providing execution receipts, provenance graphs, replay engine, and policy governance for autonomous AI systems."
+    }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        :root{
+            --black:#0a0a0b;--near-black:#111113;--surface:#18181b;
+            --surface-raised:#1f1f23;--border:#2a2a30;--border-light:#3a3a44;
+            --text:#f0f0f5;--text-dim:#90909e;--text-muted:#6b6b7a;
+            --gold:#d4a853;--gold-light:#e8c97a;--gold-glow:rgba(212,168,83,0.15);
+            --radius-sm:8px;--radius:12px;--radius-lg:20px;--transition:all 0.25s ease;
+        }
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',-apple-system,system-ui,sans-serif;background:var(--black);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+        .container{max-width:1120px;margin:0 auto;padding:0 24px}
+        nav{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;max-width:1168px;margin:0 auto;border-bottom:1px solid var(--border)}
+        .logo{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:600;color:var(--gold);letter-spacing:-0.01em}
+        .logo span{color:var(--text)}
+        nav a{color:var(--text-dim);text-decoration:none;font-size:0.875rem;font-weight:500;transition:var(--transition);margin-left:24px}
+        nav a:hover{color:var(--gold-light)}
+        .hero{padding:96px 0 80px;text-align:center;background:radial-gradient(ellipse 80% 60% at 50% 0%, rgba(212,168,83,0.06) 0%, transparent 70%)}
+        .hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:100px;padding:6px 16px;font-size:0.78rem;color:var(--text-dim);margin-bottom:28px}
+        .hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);display:inline-block}
+        .hero h1{font-size:clamp(2.2rem,4.5vw,3.5rem);font-weight:700;line-height:1.12;letter-spacing:-0.03em;margin-bottom:20px}
+        .hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .hero p{font-size:1.15rem;color:var(--text-dim);max-width:640px;margin:0 auto 40px;line-height:1.7}
+        .hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+        .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--black);text-decoration:none;padding:14px 40px;border-radius:var(--radius-sm);font-weight:600;font-size:0.95rem;transition:var(--transition)}
+        .btn-primary:hover{background:var(--gold-light);transform:translateY(-1px)}
+        .btn-secondary{display:inline-flex;align-items:center;gap:8px;background:var(--surface);color:var(--text);text-decoration:none;padding:14px 40px;border-radius:var(--radius-sm);font-weight:500;font-size:0.95rem;border:1px solid var(--border);transition:var(--transition)}
+        .btn-secondary:hover{border-color:var(--border-light);background:var(--surface-raised)}
+        section{padding:80px 0}
+        section h2{font-size:1.75rem;font-weight:600;letter-spacing:-0.02em;margin-bottom:12px}
+        section .subtitle{color:var(--text-dim);font-size:1rem;max-width:560px;margin-bottom:48px}
+        .section-tag{display:inline-block;font-size:0.72rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--gold);margin-bottom:12px}
+        .problem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+        .problem-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;border-left:3px solid #dc2626}
+        .problem-card h4{font-size:1rem;font-weight:600;margin-bottom:6px;color:#fca5a5}
+        .problem-card p{font-size:0.88rem;color:var(--text-dim);line-height:1.6}
+        .feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+        .feature-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px;transition:var(--transition);position:relative;overflow:hidden}
+        .feature-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:var(--transition)}
+        .feature-card:hover{border-color:var(--border-light);transform:translateY(-2px)}
+        .feature-card:hover::before{opacity:1}
+        .feature-card .icon{font-size:1.6rem;margin-bottom:14px}
+        .feature-card h3{font-size:1.05rem;font-weight:600;margin-bottom:8px}
+        .feature-card p{font-size:0.86rem;color:var(--text-dim);line-height:1.6}
+        .arch-block{background:var(--near-black);border:1px solid var(--border);border-radius:var(--radius-lg);padding:40px;overflow-x:auto;font-family:'SF Mono','Fira Code',monospace;font-size:0.78rem;line-height:1.8;color:var(--text-dim);white-space:pre}
+        .arch-block .hl{color:var(--gold-light)}
+        .arch-block .dim{color:var(--text-muted)}
+        .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;align-items:start}
+        .pricing-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:36px;text-align:center;transition:var(--transition)}
+        .pricing-card.featured{border-color:var(--gold);background:linear-gradient(180deg,var(--surface) 0%,var(--near-black) 100%);position:relative}
+        .pricing-card.featured::before{content:'Most Popular';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--black);padding:4px 20px;border-radius:100px;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em}
+        .pricing-card h4{font-size:1.1rem;font-weight:600;margin-bottom:4px}
+        .pricing-card .price{font-size:2.5rem;font-weight:800;color:var(--gold-light);margin:16px 0 4px}
+        .pricing-card .price span{font-size:1rem;font-weight:400;color:var(--text-dim)}
+        .pricing-card .sub{font-size:0.82rem;color:var(--text-muted);margin-bottom:24px}
+        .pricing-card ul{list-style:none;text-align:left;margin-bottom:28px}
+        .pricing-card ul li{padding:8px 0;font-size:0.85rem;color:var(--text-dim);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+        .pricing-card ul li::before{content:'✓';color:var(--gold);font-weight:700;font-size:0.8rem;width:18px}
+        .pricing-card .cta{display:block;background:var(--gold);color:var(--black);text-decoration:none;padding:12px 32px;border-radius:var(--radius-sm);font-weight:600;font-size:0.9rem;transition:var(--transition)}
+        .pricing-card .cta:hover{background:var(--gold-light)}
+        .pricing-card .cta-outline{display:block;background:transparent;color:var(--gold);text-decoration:none;padding:12px 32px;border-radius:var(--radius-sm);font-weight:600;font-size:0.9rem;border:1px solid var(--gold);transition:var(--transition)}
+        .pricing-card .cta-outline:hover{background:var(--gold-glow)}
+        .evidence-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+        .evidence-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center}
+        .evidence-card .num{font-size:2rem;font-weight:800;color:var(--gold-light);margin-bottom:4px}
+        .evidence-card .lbl{font-size:0.82rem;color:var(--text-dim)}
+        .faq-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:16px}
+        .faq-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px}
+        .faq-item h4{font-size:0.95rem;font-weight:600;margin-bottom:6px}
+        .faq-item p{font-size:0.85rem;color:var(--text-dim);line-height:1.6}
+        .cta-section{text-align:center;padding:80px 0;background:radial-gradient(ellipse 60% 50% at 50% 50%, rgba(212,168,83,0.08) 0%, transparent 70%)}
+        .cta-section h2{font-size:2rem;margin-bottom:16px}
+        .cta-section p{color:var(--text-dim);max-width:500px;margin:0 auto 32px;font-size:1rem}
+        .guarantee{background:linear-gradient(135deg,var(--surface),var(--near-black));border:1px solid var(--border);border-radius:var(--radius-lg);padding:48px;text-align:center;margin-top:24px}
+        .guarantee h3{font-size:1.3rem;margin-bottom:8px}
+        .guarantee p{color:var(--text-dim);font-size:0.9rem;max-width:500px;margin:0 auto}
+        footer{padding:32px 0;text-align:center;border-top:1px solid var(--border);color:var(--text-muted);font-size:0.82rem}
+        footer a{color:var(--gold);text-decoration:none}
+        @media(max-width:600px){
+            .hero{padding:56px 0 48px}section{padding:48px 0}
+            .faq-grid{grid-template-columns:1fr}.arch-block{font-size:0.65rem;padding:24px}
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">AIF<span>Trust</span></div>
+        <div>
+            <a href="#features">Features</a>
+            <a href="#architecture">Architecture</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#faq">FAQ</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge">
+                <span class="dot"></span> Enterprise Agent Governance &bull; Production Ready
+            </div>
+            <h1>Prove What Your Agents Did.<br><em>Trust What They'll Do Next.</em></h1>
+            <p>Execution receipts, cryptographic provenance graphs, deterministic replay, and policy-enforced authorization gates — infrastructure that makes autonomous AI auditable, accountable, and trustworthy at enterprise scale.</p>
+            <div class="hero-actions">
+                <a href="#pricing" class="btn-primary">View Plans →</a>
+                <a href="#architecture" class="btn-secondary">See Architecture</a>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="section-tag">The Problem</div>
+            <h2>Autonomous Agents Are Black Boxes</h2>
+            <p class="subtitle">Your AI agents execute critical work. Can you prove what they did? Who approved it? Whether it can be trusted again?</p>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <h4>No Audit Trail</h4>
+                    <p>Agent actions produce logs, not evidence. Logs can be modified. There's no cryptographic proof of what happened, when, or under whose authority.</p>
+                </div>
+                <div class="problem-card">
+                    <h4>No Trust Signal</h4>
+                    <p>When an agent succeeds 100 times, does that mean it's trustworthy? Or lucky? Without provenance, you can't distinguish reliability from coincidence.</p>
+                </div>
+                <div class="problem-card">
+                    <h4>No Replay Capability</h4>
+                    <p>When something goes wrong — and it will — you can't reconstruct the exact execution context. Root cause analysis becomes guesswork.</p>
+                </div>
+                <div class="problem-card">
+                    <h4>No Governance</h4>
+                    <p>Who decides what agents are allowed to do? Under what conditions? Without policy gates, every agent operates with implicit trust — until it doesn't.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features">
+        <div class="container">
+            <div class="section-tag">Platform</div>
+            <h2>The Trust Infrastructure Layer</h2>
+            <p class="subtitle">Four production-hardened subsystems that make autonomous execution provable, auditable, and governable.</p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="icon">🔏</div>
+                    <h3>Execution Receipts</h3>
+                    <p>Every agent action produces a sealed receipt — mission context, authorization snapshot, execution metrics, artifact hashes, and evidence bundle. SHA-256 sealed at creation. Immutable append-only ledger.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🕸️</div>
+                    <h3>Provenance Graph</h3>
+                    <p>10 node types, 8 relationship types. Trace the full lineage: mission → strategy → artifact → execution → receipt → evidence → verification → approval → promotion. Every node reachable from origin.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🔄</div>
+                    <h3>Replay Engine</h3>
+                    <p>Deterministic reconstruction of any past execution from sealed receipts. Compare across 4 dimensions: context hash, status, tools, artifacts. Verdict: MATCH, DRIFT, DIVERGENCE, or ERROR.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">⚖️</div>
+                    <h3>Authorization Gate</h3>
+                    <p>Six-check pipeline: agent permission → cost limits → policy evaluation → sandbox requirements → approval gates → audit trail. Every decision produces an audit entry. Unknown agents default-allow in dev, default-deny in production.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">📊</div>
+                    <h3>Observability Pipeline</h3>
+                    <p>Metrics derived from receipts, not separate instrumentation. Receipt metrics, provenance metrics, replay metrics, SLO tracking. Operators see what happened; auditors see the proof.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🔐</div>
+                    <h3>Policy Governance</h3>
+                    <p>Configurable policies: minimum trust score, maximum risk tolerance, required approval gates. Versioned policy snapshots preserved with every execution. Policy engine (hard rules) + reasoning engine (judgment) operate independently.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="architecture">
+        <div class="container">
+            <div class="section-tag">Architecture</div>
+            <h2>How Trust Flows</h2>
+            <p class="subtitle">Every agent action passes through the trust layer. Nothing executes without a receipt.</p>
+            <div class="arch-block">
+<span class="hl">                    MISSION INTENT</span>
+                         │
+                         ▼
+           ┌─────────────────────────┐
+           │   <span class="hl">Authorization Gate</span>     │  ← Six-check pipeline
+           │   Permission → Cost →    │     Agent × Policy × Budget
+           │   Policy → Sandbox →     │
+           │   Approval → Audit       │
+           └───────────┬─────────────┘
+                       │
+                       ▼
+           ┌─────────────────────────┐
+           │   <span class="hl">Execution Planner</span>       │  ← DAG-based strategy
+           │   Capability Resolution  │     Resource negotiation
+           │   Dependency Ordering    │
+           └───────────┬─────────────┘
+                       │
+                       ▼
+           ┌─────────────────────────┐
+           │   <span class="hl">Command Bus → Executor</span>  │  ← Provider-routed
+           │   LLM Ops v3.1           │     Auto-failover
+           │   Memory Fabric v3+L7    │     7-layer memory
+           └───────────┬─────────────┘
+                       │
+                       ▼
+           ┌─────────────────────────┐
+           │   <span class="hl">Execution Receipt</span>        │  ← SHA-256 sealed
+           │   ├─ Mission context     │     Immutable
+           │   ├─ Auth snapshot       │     Append-only ledger
+           │   ├─ Execution metrics   │
+           │   ├─ Artifact hashes     │
+           │   ├─ Evidence bundle     │
+           │   └─ Parent lineage      │
+           └───────────┬─────────────┘
+                       │
+          ┌────────────┼────────────┐
+          ▼            ▼            ▼
+    ┌──────────┐ ┌──────────┐ ┌──────────┐
+    │<span class="hl">Provenance</span>│ │ <span class="hl">Replay</span>    │ │<span class="hl">Observab.</span>│
+    │ Graph    │ │ Engine   │ │ Pipeline │
+    │ Lineage  │ │ 4-dim    │ │ Metrics  │
+    └──────────┘ └──────────┘ └──────────┘
+          │            │            │
+          └────────────┼────────────┘
+                       ▼
+                <span class="hl">TRUST SCORE</span>
+            (confidence × independence
+             × repeatability × freshness)
+
+<span class="dim">Kernel Invariants:
+  1. No execution without receipt.
+  2. Every receipt produces provenance.
+  3. Every scheduled execution is replayable.</span>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="section-tag">Evidence</div>
+            <h2>Production Proven</h2>
+            <p class="subtitle">This is not a whitepaper. These are running systems with verified test suites.</p>
+            <div class="evidence-grid">
+                <div class="evidence-card">
+                    <div class="num">316</div>
+                    <div class="lbl">Runtime Python Modules</div>
+                </div>
+                <div class="evidence-card">
+                    <div class="num">27</div>
+                    <div class="lbl">Verified Unit Tests</div>
+                </div>
+                <div class="evidence-card">
+                    <div class="num">6</div>
+                    <div class="lbl">Production Plugins</div>
+                </div>
+                <div class="evidence-card">
+                    <div class="num">6</div>
+                    <div class="lbl">GitHub Releases (v1→v6)</div>
+                </div>
+                <div class="evidence-card">
+                    <div class="num">15</div>
+                    <div class="lbl">Supabase Tables (idempotent)</div>
+                </div>
+                <div class="evidence-card">
+                    <div class="num">4</div>
+                    <div class="lbl">Trust Dimensions Scored</div>
+                </div>
+            </div>
+            <div class="guarantee">
+                <h3>Trust = Confidence × Independence × Repeatability × Freshness</h3>
+                <p>Not a black-box score. Every trust decision is explainable, evidence-backed, and replayable. Social signals (followers, comments, engagement) are explicitly excluded from trust computation — only production-verified artifacts drive trust state transitions.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing">
+        <div class="container">
+            <div class="section-tag">Pricing</div>
+            <h2>Enterprise Trust Infrastructure</h2>
+            <p class="subtitle">Monthly subscription. No long-term contract. Cancel anytime.</p>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h4>Starter</h4>
+                    <div class="price">$499<span>/mo</span></div>
+                    <div class="sub">For teams evaluating agent trust</div>
+                    <ul>
+                        <li>Execution receipts — full</li>
+                        <li>Basic provenance graph</li>
+                        <li>Up to 5 autonomous agents</li>
+                        <li>7-day receipt retention</li>
+                        <li>Community support</li>
+                        <li>Single region deployment</li>
+                    </ul>
+                    <a href="https://buy.stripe.com/3cIeVed6N82gfBUc6i9R60j" class="cta">Start $499/mo →</a>
+                </div>
+                <div class="pricing-card featured">
+                    <h4>Pro</h4>
+                    <div class="price">$2,500<span>/mo</span></div>
+                    <div class="sub">For production AI workloads</div>
+                    <ul>
+                        <li>Everything in Starter</li>
+                        <li>Full provenance graph + lineage</li>
+                        <li>Deterministic replay engine</li>
+                        <li>Authorization gate (6 checks)</li>
+                        <li>Policy governance + versioning</li>
+                        <li>Up to 50 autonomous agents</li>
+                        <li>90-day receipt retention</li>
+                        <li>Observability pipeline + SLOs</li>
+                        <li>Priority support (4hr SLA)</li>
+                    </ul>
+                    <a href="https://buy.stripe.com/eVq7sM4Ahbes9dweeq9R60k" class="cta">Start $2,500/mo →</a>
+                </div>
+                <div class="pricing-card">
+                    <h4>Enterprise</h4>
+                    <div class="price">Custom</div>
+                    <div class="sub">For mission-critical deployments</div>
+                    <ul>
+                        <li>Everything in Pro</li>
+                        <li>Unlimited autonomous agents</li>
+                        <li>Multi-region deployment</li>
+                        <li>Custom policy authoring</li>
+                        <li>Dedicated replay infrastructure</li>
+                        <li>Indefinite receipt retention</li>
+                        <li>On-premise deployment option</li>
+                        <li>Custom SLA + 24/7 support</li>
+                        <li>Dedicated solutions architect</li>
+                    </ul>
+                    <a href="mailto:jaylester7813@gmail.com?subject=AIF%20Trust%20Enterprise" class="cta-outline">Contact Sales →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq">
+        <div class="container">
+            <div class="section-tag">Questions</div>
+            <h2>Frequently Asked</h2>
+            <p class="subtitle">For technical decision-makers evaluating agent governance.</p>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h4>How is this different from logging?</h4>
+                    <p>Logs are descriptive ("agent called tool X"). Receipts are evidentiary — sealed with content hashes, carrying authorization context, and forming an immutable append-only ledger. Logs can be modified; receipts cannot be altered without detection.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>What does the replay engine actually verify?</h4>
+                    <p>It reconstructs execution context from sealed receipts and compares across four dimensions: context hash (exact match required), execution status, tools invoked, and artifacts produced. The verdict is MATCH, DRIFT, DIVERGENCE, or ERROR — not a fuzzy score.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>How does authorization work?</h4>
+                    <p>Six independent checks run before any agent action: agent permission verification → cost limit enforcement → policy evaluation → sandbox requirements → approval gates → audit trail creation. Each check is isolated. Unknown agents default-allow in development, default-deny in production.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Can AIF Trust integrate with existing CI/CD?</h4>
+                    <p>Yes. Execution receipts are JSON-serializable and can be exported to any observability stack. The provenance graph can be queried via API. The replay engine runs as a standalone service. All components are designed for integration.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>What technology stack does it run on?</h4>
+                    <p>Python 3.11+ runtime with PostgreSQL (Supabase) for persistence. Plugin architecture for Hermes Agent. Event-sourced with CQRS patterns. Command bus, event store, and adapter layer for provider integration. Open-core model.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Is this SOC 2 / GDPR compliant?</h4>
+                    <p>The architecture supports compliance — immutable audit trails, policy-enforced data handling, and cryptographic proof of processing. Certification roadmap: SOC 2 Type II target Q1 2027. Contact Enterprise for details.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Make Your Agents Accountable</h2>
+            <p>Agents can reason. AIF Trust proves what they were allowed to do, what they actually did, who approved it, and whether that behavior can be trusted again.</p>
+            <div class="hero-actions">
+                <a href="#pricing" class="btn-primary">View Plans →</a>
+                <a href="mailto:jaylester7813@gmail.com?subject=AIF%20Trust%20Demo" class="btn-secondary">Request Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>AIF Trust by <a href="https://github.com/frostyjay7813/AIF">Aurelian Intelligence Foundry</a> &mdash; Execution Trust Layer for Autonomous Systems</p>
+    </footer>
+</body>
+</html>
